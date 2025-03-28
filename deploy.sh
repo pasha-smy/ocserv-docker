@@ -33,7 +33,7 @@ chmod +x "${SCRIPTS[@]}"
 for SCRIPT in "${SCRIPTS[@]}"; do
   if [ -x "$SCRIPT" ]; then
     echo "--- Running $SCRIPT ---"
-    bash "./$SCRIPT" "$ENV_FILE"
+    "$SCRIPT" "$ENV_FILE"
   else
     echo "Script $SCRIPT not found or not executable. Skipping."
   fi
