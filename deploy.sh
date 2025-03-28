@@ -16,11 +16,11 @@ cd "$(dirname "$0")" || exit 1
 
 # define list of scripts
 SCRIPTS=(
-  scripts/default.sh
-  scripts/users.sh
-  scripts/ssh.sh
-  scripts/iptables.sh
-  scripts/docker.sh
+  ./scripts/default.sh
+  ./scripts/users.sh
+  ./scripts/ssh.sh
+  ./scripts/iptables.sh
+  ./scripts/docker.sh
 )
 
 # run each script in order
