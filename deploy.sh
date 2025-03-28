@@ -14,14 +14,20 @@ fi
 # go to script directory
 cd "$(dirname "$0")" || exit 1
 
+# resolve script directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 # define list of scripts
 SCRIPTS=(
-  ./scripts/default.sh
-  ./scripts/users.sh
-  ./scripts/ssh.sh
-  ./scripts/iptables.sh
-  ./scripts/docker.sh
+  "$SCRIPT_DIR/scripts/default.sh"
+  "$SCRIPT_DIR/scripts/users.sh"
+  "$SCRIPT_DIR/scripts/ssh.sh"
+  "$SCRIPT_DIR/scripts/iptables.sh"
+  "$SCRIPT_DIR/scripts/docker.sh"
 )
+
+# ensure scripts are executable
+chmod +x "${SCRIPTS[@]}"
 
 # run each script in order
 for SCRIPT in "${SCRIPTS[@]}"; do
