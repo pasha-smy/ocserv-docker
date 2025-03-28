@@ -1,0 +1,2 @@
+# create users
+# ocpasswd -c /etc/ocserv/users login

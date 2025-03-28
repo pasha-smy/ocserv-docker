@@ -1,0 +1,36 @@
+services:
+
+  ocstest:
+    container_name: ocserver
+    image: pashasmy/ocserv:latest
+    environment:
+      VPN_IP: '{{ vpn.ip }}'
+      VPN_DOMAIN: '{{ vpn.domain }}'
+      VPN_SUBNET: '{{ vpn.subnet }}'
+      VPN_DNS: '{{ vpn.dns }}'
+      VPN_WAN: '{{ vpn.int }}'
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    privileged: true
+    volumes:
+      - ./ocserv:/etc/ocserv
+      - /etc/letsencrypt:/etc/letsencrypt
+
+  dns:
+    container_name: dns-server
+    image: pashasmy/bind9:latest
+    environment:
+      ENABLE_ZONE: "falce"
+      LOCAL_DOMAIN: "local"
+      VPN_SUBNET: "{{ vpn.subnet }}"
+      DNS_FORWARDERS_MAIN: "{{ dns.forvarder.main }}"
+      DNS_FORWARDERS_ALT: "{{ dns.forvarder.alt }}"
+      EXTRA_RECORDS: |
+        gateway IN A {{ vpn.gateway }}
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    privileged: true
