@@ -56,4 +56,5 @@ cp -r ./docker/* /data/docker
 
 # run docker compose
 cd /data/docker || exit 1
+chmod +x add_vpn_users.sh
 docker compose -f docker-compose.yml up -d
